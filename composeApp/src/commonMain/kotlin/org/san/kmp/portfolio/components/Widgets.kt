@@ -66,4 +66,3 @@ fun MarqueeText(modifier: Modifier = Modifier, text: String) {
         )
     }
 }
-

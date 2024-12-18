@@ -1,6 +1,7 @@
 package org.san.kmp.portfolio.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,11 +30,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil3.compose.SubcomposeAsyncImage
 import org.san.kmp.portfolio.data.Project
 
 @Composable
-fun ProjectsView(modifier: Modifier = Modifier, projects: List<Project>) {
+fun ProjectsView(modifier: Modifier = Modifier, projects: List<Project>, navController: NavController) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
@@ -51,8 +53,9 @@ fun ProjectsView(modifier: Modifier = Modifier, projects: List<Project>) {
         ) {
 
             items(projects) { project ->
-                ProjectItem(modifier = Modifier.size(250.dp), project = project)
-
+                ProjectItem(modifier = Modifier.size(250.dp), project = project) {
+                    navController.navigate("project_details/${project.name}")
+                }
             }
 
         }
@@ -60,9 +63,11 @@ fun ProjectsView(modifier: Modifier = Modifier, projects: List<Project>) {
 }
 
 @Composable
-fun ProjectItem(modifier: Modifier = Modifier, project: Project) {
+fun ProjectItem(modifier: Modifier = Modifier, project: Project, onClick: () -> Unit) {
 
-    Card(modifier = modifier.padding(4.dp), elevation = 4.dp, shape = RoundedCornerShape(8.dp)) {
+    Card(modifier = modifier.padding(4.dp).clickable {
+        onClick()
+    }, elevation = 4.dp, shape = RoundedCornerShape(8.dp)) {
 
         Column {
             SubcomposeAsyncImage(

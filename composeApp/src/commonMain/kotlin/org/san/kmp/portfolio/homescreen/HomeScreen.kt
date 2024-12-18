@@ -2,35 +2,27 @@ package org.san.kmp.portfolio.homescreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.san.kmp.portfolio.components.BlogCard
+import androidx.navigation.NavController
 import org.san.kmp.portfolio.components.ContactView
 import org.san.kmp.portfolio.components.ExperienceView
 import org.san.kmp.portfolio.components.ProfileHeaderView
 import org.san.kmp.portfolio.components.ProjectsView
 import org.san.kmp.portfolio.components.TechStackView
-import org.san.kmp.portfolio.data.Blog
 import org.san.kmp.portfolio.data.Contact
 import org.san.kmp.portfolio.data.Project
 import org.san.kmp.portfolio.data.Work
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
 
     val mobileDeveloperTechStack = remember {
         listOf(
@@ -67,7 +59,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
 
         item {
-            ProjectsView(projects = Project.getSampleData())
+            ProjectsView(projects = Project.getSampleData(), navController = navController)
         }
 
         item {
